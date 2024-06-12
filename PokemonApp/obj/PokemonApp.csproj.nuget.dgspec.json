@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ampon\\source\\repos\\PokemonApp\\PokemonApp\\PokemonApp.csproj": {}
+    "C:\\Users\\ampon\\OneDrive\\Desktop\\Prefinal__-Assignment_Two_Pokemon_Ampong_JemichoLouise_BSIT_32E2\\PokemonApp\\PokemonApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ampon\\source\\repos\\PokemonApp\\PokemonApp\\PokemonApp.csproj": {
+    "C:\\Users\\ampon\\OneDrive\\Desktop\\Prefinal__-Assignment_Two_Pokemon_Ampong_JemichoLouise_BSIT_32E2\\PokemonApp\\PokemonApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ampon\\source\\repos\\PokemonApp\\PokemonApp\\PokemonApp.csproj",
+        "projectUniqueName": "C:\\Users\\ampon\\OneDrive\\Desktop\\Prefinal__-Assignment_Two_Pokemon_Ampong_JemichoLouise_BSIT_32E2\\PokemonApp\\PokemonApp.csproj",
         "projectName": "PokemonApp",
-        "projectPath": "C:\\Users\\ampon\\source\\repos\\PokemonApp\\PokemonApp\\PokemonApp.csproj",
+        "projectPath": "C:\\Users\\ampon\\OneDrive\\Desktop\\Prefinal__-Assignment_Two_Pokemon_Ampong_JemichoLouise_BSIT_32E2\\PokemonApp\\PokemonApp.csproj",
         "packagesPath": "C:\\Users\\ampon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ampon\\source\\repos\\PokemonApp\\PokemonApp\\obj\\",
+        "outputPath": "C:\\Users\\ampon\\OneDrive\\Desktop\\Prefinal__-Assignment_Two_Pokemon_Ampong_JemichoLouise_BSIT_32E2\\PokemonApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ampon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +44,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

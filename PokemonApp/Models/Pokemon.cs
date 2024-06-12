@@ -1,32 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
 
 namespace PokemonApp.Models
 {
     public class Pokemon
     {
-        public string name { get; set; }
-        public List<Ability> Abilities { get; set; }
-        public List<Move> Moves { get; set; }
-    }
-
-    public class Ability
-    {
-        public string Abilities { get; set; }
-    }
-
-    public class Move
-    {
-        public string Moves { get; set; }
-    }
-
-    public class PokemonResponse
-    {
-        public List<PokemonListItem> Results { get; set; }
-    }
-
-    public class PokemonListItem
-    {
         public string Name { get; set; }
-        public string Url { get; set; }
+        public List<PokemonAbility> Abilities { get; set; }
+        public List<PokemonMove> Moves { get; set; }
+
+        public class PokemonAbility
+        {
+            public AbilityDetail Ability { get; set; }
+
+            public class AbilityDetail
+            {
+                public string Name { get; set; }
+            }
+        }
+
+        public class PokemonMove
+        {
+            public MoveDetail Move { get; set; }
+
+            public class MoveDetail
+            {
+                public string Name { get; set; }
+            }
+        }
     }
 }

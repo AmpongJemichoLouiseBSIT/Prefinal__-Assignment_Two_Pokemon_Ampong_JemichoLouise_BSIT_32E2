@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PokemonApp.Models;
-using System.Text.Json;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace PokemonApp.Controllers
 {
@@ -8,48 +10,21 @@ namespace PokemonApp.Controllers
     {
         private readonly HttpClient _httpClient;
 
-        public PokemonController(IHttpClientFactory httpClientFactory)
+        public PokemonController()
         {
-            _httpClient = httpClientFactory.CreateClient();
+            _httpClient = new HttpClient();
         }
 
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string name = "rayquaza")
         {
-            var response = await _httpClient.GetAsync($"https://pokeapi.co/api/v2/pokemon/?limit=20&offset={(page - 1) * 20}");
-            response.EnsureSuccessStatusCode();
-            var responseBody = await response.Content.ReadAsStringAsync();
-            var PokemonResponse = JsonSerializer.Deserialize<PokemonResponse>(responseBody);
-
-            if (PokemonResponse != null && PokemonResponse.Results !=null) 
-            { 
-            ViewBag.NextPage = PokemonResponse.Results.Count == 20 ? page + 1 : (int?)null;
-            ViewBag.PreviousPage = page > 1 ? page - 1 : (int?)null;
-            }
-
-            return View(PokemonResponse.Results);
-        }
-
-        public async Task<IActionResult> Details(string name)
-        {
-            var response = await _httpClient.GetAsync($"https://pokeapi.co/api/v2/pokemon/{name}");
-            response.EnsureSuccessStatusCode();
-            var responseBody = await response.Content.ReadAsStringAsync();
-            var pokemon = JsonSerializer.Deserialize<Pokemon>(responseBody);
-
-            // Map abilities and moves
-            pokemon.Abilities = new List<Ability>();
-            foreach (var ability in JsonSerializer.Deserialize<JsonElement>(responseBody).GetProperty("abilities").EnumerateArray())
-            {
-                pokemon.Abilities.Add(new Ability { Abilities = ability.GetProperty("ability").GetProperty("name").GetString() });
-            }
-
-            pokemon.Moves = new List<Move>();
-            foreach (var move in JsonSerializer.Deserialize<JsonElement>(responseBody).GetProperty("moves").EnumerateArray())
-            {
-                pokemon.Moves.Add(new Move { Moves = move.GetProperty("move").GetProperty("name").GetString() });
-            }
-
+            var pokemon = await GetPokemon(name);
             return View(pokemon);
+        }
+
+        private async Task<Pokemon> GetPokemon(string name)
+        {
+            var response = await _httpClient.GetStringAsync($"https://pokeapi.co/api/v2/pokemon/{name}");
+            return JsonConvert.DeserializeObject<Pokemon>(response);
         }
     }
 }
